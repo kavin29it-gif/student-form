@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Data Entry</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f8f9fa;
+        }
+        .box {
+            width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Student Data Entry</h2>
+
+    <form onsubmit="saveData(event)">
+        <label>Name</label>
+        <input type="text" id="name" required>
+
+        <label>Roll Number</label>
+        <input type="text" id="roll" required>
+
+        <label>Date of Birth</label>
+        <input type="date" id="dob" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function saveData(event) {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let roll = document.getElementById("roll").value;
+        let dob = document.getElementById("dob").value;
+
+        let students = JSON.parse(localStorage.getItem("students")) || [];
+
+        students.push({ name, roll, dob });
+
+        localStorage.setItem("students", JSON.stringify(students));
+
+        alert("Data submitted successfully");
+
+        document.querySelector("form").reset();
+    }
+</script>
+
+</body>
+</html>
